@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 为SpringTest类中的name属性赋值
+	id“为这个对象取一个唯一标识（对象
+	class：指定这个对象是哪一个类的，给我的类的全路径） -->
+	<bean id="test" class="SpringTest">
+		<!-- 为对象中的属性赋值
+		在property中有ref和value、name三个属性
+		ref：引用其他的id（对象|组件）
+		value：直接赋值
+		name：就是为哪一个属性名赋值 -->
+		<property name="name" value="hellospring!!!"></property>
+	</bean>
+	<bean id="ps" class="Spring">
+		<property name="first" value="三天不打，上房揭瓦"></property>
+		<property name="second" value="世界上有n种人"></property>
+	</bean>
+	<!-- 配置主键
+	墨盒（彩色和黑白）和纸张（A4和B5）的组件 -->
+	<!-- 创建墨盒的组件 -->
+	<!-- 彩色墨盒 -->
+	<bean id="colorInk" class="print.MulticolorInk"></bean>
+	<bean id="blankInk" class="print.BlackWhiteInk"></bean>
+	<!-- 创建纸张组件 -->
+	<bean id="A4" class="print.A4paper"></bean>
+	<bean id="B5" class="print.B5paper"></bean>
+	<!-- 组装打印机 -->
+	<!-- 组装一台彩色A4打印机 -->
+	<bean id="colorPrinter" class="print.Printer">
+		<!-- 为墨盒属性设置值
+		引用定义好的bean组件，ref -->
+		<property name="ink" ref="colorInk"></property>
+		<property name="paper" ref="A4"></property>
+	</bean>
+	<!-- 组装一台黑白A4打印机 -->
+	<!-- 组装一台彩色B5打印机 -->
+	<!-- 组装一台黑白B5打印机 -->
+	<bean id="intel" class="compture.intel"></bean>
+	<bean id="memory8" class="compture.memory8"></bean>
+	<bean id="hard" class="compture.hard"></bean>
+	<bean id="compture" class="compture.computer">
+		<property name="cpu" ref="intel"></property>
+		<property name="memory" ref="memory8"></property>
+		<property name="hard" ref="hard"></property>
+	</bean>
+	<bean id="userDao" class="dao.impl.UserDaoImpl"/>
+	<bean id="userService" class="service.impl.UserServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<!-- 配置业务日志类组件 -->
+	<bean id="theLogger" class="logger.UserServiceLogger"></bean>
+</beans>
